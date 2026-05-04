@@ -1,6 +1,7 @@
 package com.ai.demo.service;
 
 import com.ai.demo.dto.request.CategoryRequest;
+import com.ai.demo.dto.response.CategoryResponse;
 import com.ai.demo.entity.Category;
 
 import java.util.List;
@@ -17,6 +18,6 @@ public interface CategoryService {
 
     Category updateCategory(UUID id, CategoryRequest request);
 
-    Void deleteCategory(UUID id);
+    CategoryResponse deleteCategory(UUID id);
 
 }

@@ -2,6 +2,7 @@ package com.ai.demo.controller;
 
 import com.ai.demo.dto.request.CategoryRequest;
 import com.ai.demo.dto.response.ApiResponse;
+import com.ai.demo.dto.response.CategoryResponse;
 import com.ai.demo.entity.Category;
 import com.ai.demo.repository.CategoryRepository;
 import com.ai.demo.service.CategoryService;
@@ -68,8 +69,8 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{id}")
-    public ApiResponse<Void> deleteCategory(@PathVariable UUID id){
-        return ApiResponse.<Void>builder()
+    public ApiResponse<CategoryResponse> deleteCategory(@PathVariable UUID id){
+        return ApiResponse.<CategoryResponse>builder()
                 .code(1000)
                 .message("Delete category successfully")
                 .result(categoryService.deleteCategory(id))

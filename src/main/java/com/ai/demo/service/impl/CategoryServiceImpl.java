@@ -1,9 +1,11 @@
 package com.ai.demo.service.impl;
 
 import com.ai.demo.dto.request.CategoryRequest;
+import com.ai.demo.dto.response.CategoryResponse;
 import com.ai.demo.entity.Category;
 import com.ai.demo.exception.AppException;
 import com.ai.demo.exception.ErrorCode;
+import com.ai.demo.mapper.CategoryMapper;
 import com.ai.demo.repository.CategoryRepository;
 import com.ai.demo.service.CategoryService;
 import com.ai.demo.util.StringUtils;
@@ -20,7 +22,10 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 
 public class CategoryServiceImpl implements CategoryService {
-    CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
+    private final CategoryMapper categoryMapper;
+
+
     @Override
     public Category createCategory(CategoryRequest request) {
         String generatedSlug = StringUtils.toSlug(request.getName());
@@ -80,13 +85,14 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Void deleteCategory(UUID id) {
+    public CategoryResponse deleteCategory(UUID id) {
         Category category = getCategoryById(id);
 
         category.setDeleted(true);
 
         category.setSlug(category.getSlug() + "-deleted-" + System.currentTimeMillis());
+        Category savedCategory = categoryRepository.save(category);
 
-        categoryRepository.save(category);
+        return categoryMapper.toCategoryResponse(savedCategory);
     }
 }
