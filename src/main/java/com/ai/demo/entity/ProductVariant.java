@@ -11,7 +11,6 @@ import java.math.BigDecimal;
 @Entity
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -27,8 +26,7 @@ public class ProductVariant extends BaseEntity {
     @Column(name = "base_price", nullable = false, precision = 10, scale = 0)
     BigDecimal basePrice;
 
-    @Column(name = "is_default", nullable = false)
-    @Builder.Default
+    @Column(name = "is_default", nullable = false, columnDefinition = "boolean default true")
     Boolean isDefault = false;
 
 

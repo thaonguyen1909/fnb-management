@@ -9,18 +9,20 @@ public class StringUtils {
         if(input == null || input.isEmpty()){
             return "";
         }
+        String replaced = input
+                .replace("đ","d")
+                .replace("Đ", "D");
         //B1. Tach dau thanh ra khoi chu cai
         String nomalized = Normalizer.normalize(input,Normalizer.Form.NFD);
+        String normalized = Normalizer.normalize(replaced,Normalizer.Form.NFD);
 
         //B2. Dung regex de xoa cac ky tu dac biet
         Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
-        String slug = pattern.matcher(nomalized).replaceAll("");
 
-        return slug.toLowerCase()
-                .replaceAll("đ", "d") //Thay the ky tu "đ" bang "d"
-                .replaceAll("[^a-zA-Z0-9]", "") //B3. Thay the cac ky tu khong phai chu cai va so bang dau "-"
-                .replaceAll("-+", "-") //B4. Xoa cac dau "-" lien tiep
-                .replaceAll("^-|-$", "")//B5. Xoa dau "-" o dau va cuoi chuoi
-                ;
+        return pattern.matcher(normalized).replaceAll("")
+                .toLowerCase()
+                .replaceAll("[^a-zA-Z0-9]", "-")
+                .replaceAll("-+","-")
+                .replaceAll("^-|-$","");
     }
 }

@@ -3,6 +3,7 @@ package com.ai.demo.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.SQLRestriction;
 
 import java.util.List;
@@ -11,7 +12,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name = "categories")
 @SQLRestriction("is_deleted = false")
@@ -24,11 +24,9 @@ public class Category extends BaseEntity {
     String slug;
 
     @Column(name = "display_order", nullable = false)
-    @Builder.Default
     Integer displayOrder = 0;
 
     @Column(name = "is_active", nullable = false)
-    @Builder.Default
     Boolean isActive = true;
 
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

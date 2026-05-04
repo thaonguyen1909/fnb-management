@@ -10,7 +10,6 @@ import java.math.BigDecimal;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Table(name = "option_items")
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -23,11 +22,9 @@ public class OptionItem extends BaseEntity{
     String name;
 
     @Column(name = "extra_price", nullable = false, precision = 10, scale = 0)
-    @Builder.Default
     BigDecimal extraPrice = BigDecimal.ZERO;
 
     @Column(name = "is_default", nullable = false)
-    @Builder.Default
     Boolean isDefault = false;
 
 }

@@ -1,23 +1,26 @@
 package com.ai.demo.service;
 
 import com.ai.demo.dto.request.CategoryRequest;
+import com.ai.demo.dto.response.CategoryDeleteResponse;
+import com.ai.demo.dto.response.CategoryDetailResponse;
 import com.ai.demo.dto.response.CategoryResponse;
+import com.ai.demo.dto.response.CategorySummaryResponse;
 import com.ai.demo.entity.Category;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface CategoryService {
-    Category createCategory(CategoryRequest request);
+    CategoryDetailResponse createCategory(CategoryRequest request);
 
-    List<Category> getActiveCategories();
+    List<CategorySummaryResponse> getActiveCategories();
 
-    List<Category> getAllCategories();
+    List<CategorySummaryResponse> getAllCategories();
 
-    Category getCategoryById(UUID id);
+    CategoryDetailResponse getCategoryById(UUID id);
 
-    Category updateCategory(UUID id, CategoryRequest request);
+    CategoryDetailResponse updateCategory(UUID id, CategoryRequest request);
 
-    CategoryResponse deleteCategory(UUID id);
+    CategoryDeleteResponse deleteCategory(UUID id);
 
 }

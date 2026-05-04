@@ -9,7 +9,6 @@ import lombok.experimental.FieldDefaults;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Table(name = "option_groups")
 @FieldDefaults(level = lombok.AccessLevel.PRIVATE)
 public class OptionGroup extends BaseEntity{
@@ -24,7 +23,6 @@ public class OptionGroup extends BaseEntity{
     OptionGroupType type;
 
     @Column(name = "is_required", nullable = false)
-    @Builder.Default
     Boolean isRequired = false;
 
     public enum OptionGroupType {

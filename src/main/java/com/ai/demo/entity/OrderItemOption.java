@@ -10,8 +10,7 @@ import java.math.BigDecimal;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@Table(name = "order_items")
+@Table(name = "order_item_options")
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class OrderItemOption extends BaseEntity{

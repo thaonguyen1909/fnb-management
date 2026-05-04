@@ -8,7 +8,6 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "users", indexes = {
@@ -28,8 +27,7 @@ public class User extends BaseEntity{
     @Column(name = "password_hash", nullable = false)
     String passwordHash;
 
-    @Column(name = "is_active", nullable = false)
-    @Builder.Default
+    @Column(name = "is_active", nullable =false , columnDefinition = "boolean default true")
     Boolean isActive = true;
 
     @ManyToOne(fetch = FetchType.LAZY)

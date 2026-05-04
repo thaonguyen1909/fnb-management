@@ -11,7 +11,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @FieldDefaults(level = lombok.AccessLevel.PRIVATE)
 @Entity
 @Table(name = "orders", indexes = {
@@ -52,7 +51,6 @@ public class Order extends BaseEntity {
     BigDecimal subtotal;
 
     @Column(name = "discount_amount", nullable = false, precision = 12, scale = 0)
-    @Builder.Default
     BigDecimal discountAmount = BigDecimal.ZERO;
 
     @Column(name = "total_amount", nullable = false, precision = 12, scale = 0)

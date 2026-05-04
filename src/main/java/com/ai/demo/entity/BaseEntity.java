@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -25,11 +26,11 @@ public abstract class BaseEntity {
 
     @CreatedDate
     @Column(name = "create_at", nullable = false, updatable = false)
-    LocalDateTime createAt;
+    LocalDateTime createdAt;
 
     @LastModifiedDate
     @Column(name = "update_at", nullable = false, updatable = false)
-    LocalDateTime updateAt;
+    LocalDateTime updatedAt;
 
     @Column(name = "is_deleted", nullable = false)
     boolean isDeleted = false;

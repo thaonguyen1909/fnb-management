@@ -33,9 +33,10 @@ public class GlobalExceptionHandler {
                 .message(errorMessage)
                 .build();
 
-        return ResponseEntity.internalServerError().body(apiResponse);
+        return ResponseEntity.badRequest().body(apiResponse);
     }
 
+    @ExceptionHandler(value = Exception.class)
     public ResponseEntity<ApiResponse<Void>> handlingRunTimeException(Exception e){
         log.error("Unexpected error: ", e);
         ApiResponse<Void> apiResponse = ApiResponse.<Void>builder()

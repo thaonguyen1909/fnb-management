@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Table(name = "payments")
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -22,11 +21,10 @@ public class Payment extends BaseEntity{
 
     @Enumerated(EnumType.STRING)
     @Column(name = "method", nullable = false, length = 20)
-    PaymnentMethod PaymentMethod;
+    PaymnentMethod method;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "payment_status", nullable = false, length = 20)
-    @Builder.Default
+    @Column(name = "payment_status", nullable = false, length = 20, columnDefinition = "varchar(20) default 'PENDING'")
     PaymentStatus paymentStatus = PaymentStatus.PENDING;
 
     @Column(name = "amount", nullable = false, precision = 12, scale = 0)
