@@ -20,7 +20,7 @@ public class GlobalExceptionHandler {
                 .code(errorCode.getCode())
                 .message(errorCode.getMessage())
                 .build();
-        return ResponseEntity.status(errorCode.getCode()).body(response);
+        return ResponseEntity.badRequest().body(response);
     }
 
     //Hung loi validation
@@ -33,7 +33,7 @@ public class GlobalExceptionHandler {
                 .message(errorMessage)
                 .build();
 
-        return ResponseEntity.badRequest().body(apiResponse);
+        return ResponseEntity.internalServerError().body(apiResponse);
     }
 
     public ResponseEntity<ApiResponse<Void>> handlingRunTimeException(Exception e){

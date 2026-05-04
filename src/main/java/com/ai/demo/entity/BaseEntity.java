@@ -30,4 +30,7 @@ public abstract class BaseEntity {
     @LastModifiedDate
     @Column(name = "update_at", nullable = false, updatable = false)
     LocalDateTime updateAt;
+
+    @Column(name = "is_deleted", nullable = false)
+    boolean isDeleted = false;
 }
