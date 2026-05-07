@@ -103,7 +103,7 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryMapper.toDeleteResponse(savedCategory);
     }
 
-    public Category findByIdOrThrow(UUID id){
+    private Category findByIdOrThrow(UUID id){
         return categoryRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.CATEGORY_NOT_FOUND));
     }
 }

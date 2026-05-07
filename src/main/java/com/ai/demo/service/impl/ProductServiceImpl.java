@@ -81,7 +81,7 @@ public class ProductServiceImpl implements ProductService {
         Product product = findByIdOrThrow(id);
 
         if(request.getCategoryId() != null && !product.getCategory().getId().equals(request.getCategoryId())) {
-            Category newCategory = categoryRepository.findById(request.getCategoryId()).orElseThrow(()-> new AppException(ErrorCode.PRODUCT_NOT_FOUND));
+            Category newCategory = categoryRepository.findById(request.getCategoryId()).orElseThrow(()-> new AppException(ErrorCode.CATEGORY_NOT_FOUND));
             product.setCategory(newCategory);
         }
 
@@ -107,7 +107,7 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
-    public Product findByIdOrThrow(UUID id){
+    private Product findByIdOrThrow(UUID id){
         return productRepository.findById(id)
                 .orElseThrow(()-> new AppException(ErrorCode.PRODUCT_NOT_FOUND));
     }

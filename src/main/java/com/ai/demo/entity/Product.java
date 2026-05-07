@@ -2,6 +2,8 @@ package com.ai.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.SQLRestriction;
 
 import java.util.List;
 
@@ -10,6 +12,8 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@SQLRestriction("is_deleted = false")
+@SuperBuilder
 @Table(name = "products")
 public class Product extends BaseEntity{
     @ManyToOne(fetch = FetchType.LAZY)

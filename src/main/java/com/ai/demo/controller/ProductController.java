@@ -11,6 +11,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestClient;
 
@@ -63,6 +64,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
+    @Transactional
     public ApiResponse<ProductDetailResponse> updateProduct(@PathVariable UUID id, @Valid @RequestBody ProductRequest request){
         return ApiResponse.<ProductDetailResponse>builder()
                 .code(1000)
@@ -72,12 +74,10 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public ApiResponse<Void> deleteProduct(@PathVariable UUID id){
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteProduct(@PathVariable UUID id){
         productService.deleteProduct(id);
-        return ApiResponse.<Void>builder()
-                .code(1000)
-                .message("Delete product successfully")
-                .build();
+
     }
 
 }
