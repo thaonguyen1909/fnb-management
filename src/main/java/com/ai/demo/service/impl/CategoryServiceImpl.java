@@ -38,12 +38,13 @@ public class CategoryServiceImpl implements CategoryService {
             throw new AppException(ErrorCode.CATEGORY_EXISTED);
         }
 
-        Category category = Category.builder()
-                .name(request.getName())
-                .slug(generatedSlug)
-                .displayOrder(request.getDisplayOrder() != null ? request.getDisplayOrder() : 0)
-                .isActive(request.getIsActive() != null ? request.getIsActive() : true)
-                .build();
+        Category category = categoryMapper.toEntity(request);
+        category.setSlug(generatedSlug);
+
+        if (category.getDisplayOrder() == null) category.setDisplayOrder(0);
+        if (category.getIsActive() == null) category.setIsActive(true);
+
+
         Category saved = categoryRepository.save(category);
         return categoryMapper.toDetailResponse(saved);
     }
@@ -51,7 +52,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     @Transactional(readOnly = true)
     public List<CategorySummaryResponse> getActiveCategories() {
-        return categoryRepository.findAllByAndIsActiveTrueOrderByDisplayOrderAsc()
+        return categoryRepository.findAllByIsActiveTrueOrderByDisplayOrderAsc()
                 .stream()
                 .map(categoryMapper::toSummaryResponse)
                 .toList();
@@ -85,7 +86,6 @@ public class CategoryServiceImpl implements CategoryService {
 
         categoryMapper.updateCategoryFromRequest(category, request);
         category.setSlug(newSlug);
-
         Category saved = categoryRepository.save(category);
         return categoryMapper.toDetailResponse(saved);
     }

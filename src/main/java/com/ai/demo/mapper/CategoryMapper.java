@@ -6,10 +6,7 @@ import com.ai.demo.dto.response.CategoryDetailResponse;
 import com.ai.demo.dto.response.CategoryResponse;
 import com.ai.demo.dto.response.CategorySummaryResponse;
 import com.ai.demo.entity.Category;
-import org.mapstruct.Builder;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring", builder = @Builder(disableBuilder = true))
 public interface CategoryMapper {
@@ -31,6 +28,7 @@ public interface CategoryMapper {
     CategoryDetailResponse toDetailResponse(Category category);
 
     //4. Update Entity from Request DTO
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE) // neu co thang nao null thi giu nguyen du lieu cu
     @Mapping(target = "slug", ignore = true)   // slug do Service xử lý
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)

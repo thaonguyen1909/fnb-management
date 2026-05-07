@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@SuperBuilder
 @Table(name = "categories")
 @SQLRestriction("is_deleted = false")
 @FieldDefaults(level = AccessLevel.PRIVATE)

@@ -20,7 +20,7 @@ public class GlobalExceptionHandler {
                 .code(errorCode.getCode())
                 .message(errorCode.getMessage())
                 .build();
-        return ResponseEntity.badRequest().body(response);
+        return ResponseEntity.status(errorCode.getHttpStatusCode()).body(response);
     }
 
     //Hung loi validation
@@ -28,9 +28,16 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponse<Void>> handlingValidationException(MethodArgumentNotValidException e) {
         String errorMessage = e.getFieldError() != null ? e.getFieldError().getDefaultMessage() : ErrorCode.INVALID_DATA.getMessage();
 
+        ErrorCode errorCode;
+        try{
+            errorCode = ErrorCode.valueOf(errorMessage);
+        }catch(IllegalArgumentException ex){
+            errorCode = ErrorCode.INVALID_DATA;
+        }
+
         ApiResponse<Void> apiResponse = ApiResponse.<Void>builder()
-                .code(ErrorCode.INVALID_DATA.getCode())
-                .message(errorMessage)
+                .code(errorCode.getCode())
+                .message(errorCode.getMessage())
                 .build();
 
         return ResponseEntity.badRequest().body(apiResponse);
@@ -43,6 +50,6 @@ public class GlobalExceptionHandler {
                 .code(ErrorCode.UNCATEGORIZED_EXCEPTION.getCode())
                 .message(ErrorCode.UNCATEGORIZED_EXCEPTION.getMessage())
                 .build();
-        return ResponseEntity.status(ErrorCode.UNCATEGORIZED_EXCEPTION.getCode()).body(apiResponse);
+        return ResponseEntity.status(ErrorCode.UNCATEGORIZED_EXCEPTION.getHttpStatusCode()).body(apiResponse);
     }
 }

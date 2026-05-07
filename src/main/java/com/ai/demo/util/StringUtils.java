@@ -13,7 +13,6 @@ public class StringUtils {
                 .replace("đ","d")
                 .replace("Đ", "D");
         //B1. Tach dau thanh ra khoi chu cai
-        String nomalized = Normalizer.normalize(input,Normalizer.Form.NFD);
         String normalized = Normalizer.normalize(replaced,Normalizer.Form.NFD);
 
         //B2. Dung regex de xoa cac ky tu dac biet

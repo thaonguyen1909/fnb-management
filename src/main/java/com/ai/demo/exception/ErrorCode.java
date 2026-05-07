@@ -19,11 +19,14 @@ public enum ErrorCode {
     NOT_BLANK(1007, "Trường dữ liệu không được để trống", HttpStatus.BAD_REQUEST),
 
 
-    //---------------------CATEGORY(1100 -> 1500)--------------------
+    //---------------------CATEGORY(1100 -> 1200)--------------------
     CATEGORY_EXISTED(1101, "Danh mục đã tồn tại", HttpStatus.BAD_REQUEST),
     CATEGORY_NOT_FOUND(1102, "Danh mục không tồn tại", HttpStatus.NOT_FOUND),
-    CATEGORY_NAME_SIZE(1103, "Tên danh mục không được vượt quá 100 ký tự", HttpStatus.BAD_REQUEST);
+    CATEGORY_NAME_SIZE(1103, "Tên danh mục không được vượt quá 100 ký tự", HttpStatus.BAD_REQUEST),
 
+    //---------------------PRODUCT(1201 -> 1300)--------------------
+    PRODUCT_EXISTED(1201, "Sản phẩm đã tồn tại", HttpStatus.BAD_REQUEST),
+    PRODUCT_NOT_FOUND(1202, "Không tìm thấy sản phẩm", HttpStatus.NOT_FOUND);
 
     private int code;
     private String message;
